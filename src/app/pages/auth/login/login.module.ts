@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
-import { HeaderModule } from 'src/app/componets/header/header.module';
 
 @NgModule({
   declarations: [LoginComponent],
-  imports: [CommonModule, LoginRoutingModule, HeaderModule]
+  imports: [CommonModule, LoginRoutingModule]
 })
 export class LoginModule {}
