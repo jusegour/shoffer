@@ -7,6 +7,11 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: 'consumidores',
+    loadChildren: () =>
+      import('./pages/consumidores/consumidores.module').then(m => m.ConsumidoresModule)
   }
 ];
 

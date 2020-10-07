@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth.component';
+import { LoginGuard } from '../../guards/login.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,9 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-        loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+        loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
+        canActivate: [LoginGuard],
+        data: { expectedUsuario: 'CONSUMIDOR' }
       },
       {
         path: 'register',

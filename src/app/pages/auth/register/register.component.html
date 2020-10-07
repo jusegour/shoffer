@@ -3,10 +3,10 @@
     <div class="col-lg-5">
       <h3 class="text-center">Crear cuenta</h3>
       <div class="card card-body mb-5">
-        <form>
+        <form [formGroup]="formUsuarioConsumidor" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label for="nombre1">Primer nombre: *</label>
-            <input type="text" class="form-control" id="nombre1" fomcControlName="nombre1" />
+            <input type="text" class="form-control" id="nombre1" formControlName="nombre1" />
           </div>
           <div class="form-group">
             <label for="apellido1">Primer apellido: *</label>
@@ -19,7 +19,7 @@
 
           <div class="form-group">
             <label for="password">Contraseña: *</label>
-            <input type="password" class="form-control" id="password" forcControlName="password" />
+            <input type="password" class="form-control" id="password" formControlName="password" />
           </div>
 
           <div class="form-group">
@@ -28,12 +28,12 @@
               type="password"
               class="form-control"
               id="repetPassword"
-              formcConrolName="repetPassword"
+              formControlName="repetPassword"
             />
           </div>
 
           <button class="btn btn-success btn-block btn-lg mb-2">Registrarse</button>
-          ¿Ya tienes una cuenta? <a routerLink="login">Iniciar sesión</a>
+          ¿Ya tienes una cuenta? <a routerLink="/auth/login">Iniciar sesión</a>
         </form>
       </div>
     </div>
