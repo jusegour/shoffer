@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioConsumidorService } from 'src/app/core/services/usuario-consumidor.service';
+import { ConsumidorService } from 'src/app/core/services/consumidor.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private usuarioConsumidorService: UsuarioConsumidorService
+    private consumidorService: ConsumidorService
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.usuarioConsumidorService.login(this.formLogin.value).subscribe(
+    this.consumidorService.login(this.formLogin.value).subscribe(
       data => {
         alert(data.message);
         localStorage.setItem('CONSUMIDOR_TOKEN', data.token);

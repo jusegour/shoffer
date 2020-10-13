@@ -16,10 +16,7 @@ export class AuthService {
 
       if (token) {
         const { exp } = jwt_decode(token);
-        console.log(exp);
-
         const isTokenExpired = new Date().getTime() > exp * 1000;
-
         if (isTokenExpired) {
           this.removerTokens(tipoUsuario);
           return false;
@@ -43,7 +40,35 @@ export class AuthService {
         this.removerTokens(tipoUsuario);
       }
     } catch (err) {
-      console.log(err);
+      return null;
+    }
+  }
+
+  getNombreUsuario(tipoUsuario: TipoUsuario): string {
+    try {
+      const token = localStorage.getItem(`${tipoUsuario}_TOKEN`);
+      if (token) {
+        const { nombre } = jwt_decode(token);
+        return nombre;
+      } else {
+        this.removerTokens(tipoUsuario);
+      }
+    } catch (err) {
+      return null;
+    }
+  }
+
+  getIdUsuario(tipoUsuario: TipoUsuario): number {
+    try {
+      const token = localStorage.getItem(`${tipoUsuario}_TOKEN`);
+      if (token) {
+        const { id } = jwt_decode(token);
+        return id;
+      } else {
+        this.removerTokens(tipoUsuario);
+      }
+    } catch (err) {
+      return null;
     }
   }
 

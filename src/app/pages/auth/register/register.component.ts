@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { UsuarioConsumidorService } from 'src/app/core/services/usuario-consumidor.service';
+import { Router } from '@angular/router';
+import { ConsumidorService } from 'src/app/core/services/consumidor.service';
 
 @Component({
   selector: 'app-register',
@@ -8,15 +9,16 @@ import { UsuarioConsumidorService } from 'src/app/core/services/usuario-consumid
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  formUsuarioConsumidor: FormGroup;
+  formConsumidor: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private usuarioConsumidorService: UsuarioConsumidorService
+    private consumidorService: ConsumidorService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.formUsuarioConsumidor = this.fb.group({
+    this.formConsumidor = this.fb.group({
       nombre1: [null],
       apellido1: [null],
       correo: [null],
@@ -26,8 +28,12 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.usuarioConsumidorService.storeUsuario(this.formUsuarioConsumidor.value).subscribe(
-      data => console.log(data),
+    this.consumidorService.storeConsumidor(this.formConsumidor.value).subscribe(
+      data => {
+        alert(data.message);
+        localStorage.setItem('CONSUMIDOR_TOKEN', data.token);
+        this.router.navigate(['/consumidores/completar-registro']);
+      },
       err => console.log(err)
     );
   }

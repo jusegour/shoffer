@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { UsuarioConsumidorService } from './services/usuario-consumidor.service';
+import { ConsumidorService } from './services/consumidor.service';
 import { AuthService } from './services/auth.service';
 
 @NgModule({
-  providers: [UsuarioConsumidorService, AuthService],
+  providers: [ConsumidorService, AuthService],
   imports: [HttpClientModule]
 })
 export class CoreModule {}

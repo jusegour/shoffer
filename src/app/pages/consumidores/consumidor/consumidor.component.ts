@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-consumidor',
@@ -6,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./consumidor.component.css']
 })
 export class ConsumidorComponent implements OnInit {
-  constructor() {}
+  nombre: string;
+  constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.nombre = this.authService.getNombreUsuario('CONSUMIDOR');
+  }
+
+  logout() {
+    localStorage.removeItem('CONSUMIDOR_TOKEN');
+    location.reload();
+  }
 }
