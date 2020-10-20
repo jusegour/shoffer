@@ -26,7 +26,7 @@ export class ConsumidorService {
 
   login(data: any): Observable<any> {
     return this.http
-      .post(environment.urlBackend + `consumidores/login`, data)
+      .post(environment.urlBackend + `auth/login-consumidor`, data)
       .pipe(map(data => data));
   }
 }
