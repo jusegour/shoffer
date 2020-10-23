@@ -5,22 +5,20 @@ import { AuthService } from '../core/services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGuard implements CanActivate {
+export class VendedorGuard implements CanActivate {
   constructor(public authService: AuthService, public router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    const expectedUsuario = route.data.expectedUsuario;
+    const expectedEstado = route.data.expectedEstado;
+    const currentEstado = this.authService.getEstadoUsuario('VENDEDOR');
 
-    if (this.authService.isAuthenticated(expectedUsuario)) {
-      switch (expectedUsuario) {
-        case 'VENDEDOR':
+    if (expectedEstado != currentEstado) {
+      switch (currentEstado) {
+        case 'ESPERA':
+          this.router.navigate(['/vendedores/completar-registro']);
+          break;
+        case 'ACTIVO':
           this.router.navigate(['/vendedores']);
-          break;
-        case 'CONSUMIDOR':
-          this.router.navigate(['/consumidores']);
-          break;
-        case 'ADMIN':
-          this.router.navigate(['/admins']);
           break;
         default:
           console.log('caso erroneo.');
@@ -28,6 +26,7 @@ export class LoginGuard implements CanActivate {
       }
       return false;
     }
+
     return true;
   }
 }

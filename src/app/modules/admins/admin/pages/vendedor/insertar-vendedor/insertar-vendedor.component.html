@@ -13,7 +13,72 @@
         <input formControlName="correo" type="email" class="form-control" />
       </div>
 
-      <button class="btn btn-success" type="submit">Insertar</button>
+      <div class="form-group">
+        <label for="">Documento persona natural: *</label>
+        <input type="text" class="form-control" formControlName="numDocumentoPN" />
+      </div>
+
+      <div class="form-group">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-toggle="modal"
+          data-target="#modalPNatural"
+        >
+          No se encuentra registrado
+        </button>
+      </div>
+
+      <button class="btn btn-success" [disabled]="isLoading" type="submit">
+        {{ isLoading ? 'Cargando...' : 'Insertar' }}
+      </button>
     </form>
+  </div>
+</div>
+
+<!-- Modal Registro Persona Natural -->
+<div
+  class="modal fade"
+  id="modalPNatural"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registrar persona natural</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formPersonaNatural" (ngSubmit)="onSubmitPN()">
+          <div class="form-group">
+            <label for="tipoDocumento">Tipo documento: *</label>
+            <select class="form-control" id="tipoDocumento" formControlName="tipoDocumento">
+              <option [value]="null" disabled>Seleccione una opcion</option>
+              <option value="CC">CC</option>
+              <option value="EXTRANJERIA">EXTRANJERIA</option>
+              <option value="PEP">PEP</option>
+              <option value="PASAPORTE">PASAPORTE</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="numDocumento">Numero de documento:</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="numDocumento"
+              formControlName="numDocumento"
+            />
+          </div>
+
+          <button class="btn btn-success btn-block btn-lg mb-2" type="submit">
+            {{ isLoading ? 'Cargando...' : 'Registrar' }}
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

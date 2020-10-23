@@ -23,6 +23,13 @@ const routes: Routes = [
         data: { expectedUsuario: 'ADMIN' }
       },
       {
+        path: 'login-vendedor',
+        loadChildren: () =>
+          import('./login-vendedor/login-vendedor.module').then(m => m.LoginVendedorModule),
+        canActivate: [LoginGuard],
+        data: { expectedUsuario: 'VENDEDOR' }
+      },
+      {
         path: 'register',
         loadChildren: () => import('./register/register.module').then(m => m.RegisterModule),
         canActivate: [LoginGuard],

@@ -17,10 +17,13 @@ export class AuthGuard implements CanActivate {
 
     switch (expectedUsuario) {
       case 'CONSUMIDOR':
-        this.router.navigate(['/auth/login-consumidor'], { queryParams: { next: state.url } });
+        this.router.navigate(['/auth/login'], { queryParams: { next: state.url } });
         break;
       case 'ADMIN':
         this.router.navigate(['/auth/login-admin'], { queryParams: { next: state.url } });
+        break;
+      case 'VENDEDOR':
+        this.router.navigate(['/auth/login-vendedor'], { queryParams: { next: state.url } });
         break;
       default:
         console.log('caso erroneo.');

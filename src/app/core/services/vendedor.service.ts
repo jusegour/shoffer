@@ -24,7 +24,7 @@ export class VendedorService {
 
   login(data: any): Observable<any> {
     return this.http
-      .post(environment.urlBackend + `auth/login-Vendedor`, data)
+      .post(environment.urlBackend + `auth/login-vendedor`, data)
       .pipe(map(data => data));
   }
 }

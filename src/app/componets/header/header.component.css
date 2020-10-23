@@ -7,7 +7,11 @@
     max-width: 1372px !important;
   }
 }
-
+.navegacion {
+  /* background: #f67503; */
+  /* background: rgb(246, 117, 3); */
+  background: linear-gradient(180deg, rgba(246, 117, 3, 1) 30%, rgba(238, 173, 67, 1) 100%);
+}
 .menu {
   display: flex;
   padding: 10px 0;
@@ -54,7 +58,7 @@
   display: flex;
   justify-content: space-around;
   background-color: white;
-  border: 2px solid #4d0a68;
+  border: 2px solid black;
   max-width: 800px;
   height: 50px;
   border-radius: 20px;
