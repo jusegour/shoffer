@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { PersonaNaturalService } from 'src/app/core/services/persona-natural.service';
+import { DepartamentoService } from 'src/app/core/services/departamento.service';
 import { VendedorService } from 'src/app/core/services/vendedor.service';
 
 @Component({
@@ -14,14 +14,15 @@ export class CompletarRegistroComponent implements OnInit {
   isLoading: boolean;
   formVendedor: FormGroup;
   formPersonaNatural: FormGroup;
-  idPersonaN: number;
+  departamentos: Array<any>;
+  municipios: Array<any>;
 
   constructor(
     private fb: FormBuilder,
     private vendedorService: VendedorService,
     private authService: AuthService,
-    private pNaturalService: PersonaNaturalService,
-    private router: Router
+    private router: Router,
+    private departamentoService: DepartamentoService
   ) {}
 
   ngOnInit(): void {
@@ -30,10 +31,8 @@ export class CompletarRegistroComponent implements OnInit {
       rut: [null, Validators.required],
       razonSocial: [null, Validators.required],
       sitioWeb: [null, Validators.required],
-      direccion: this.fb.group({
-        pais: [null, Validators.required],
-        departamento: [null, Validators.required],
-        municipio: [null, Validators.required],
+      Direccion: this.fb.group({
+        MunicipioId: [null, Validators.required],
         barrio: [null, Validators.required],
         direccion: [null, Validators.required]
       })
@@ -53,13 +52,20 @@ export class CompletarRegistroComponent implements OnInit {
     });
 
     this.vendedorService.getVendedor(this.authService.getIdUsuario('VENDEDOR')).subscribe(
-      ({ PersonaNatural, ...vendedor }) => {
+      vendedor => {
         this.formVendedor.patchValue(vendedor);
-        this.formPersonaNatural.patchValue(PersonaNatural);
-        this.idPersonaN = PersonaNatural.id;
       },
       err => console.log(err)
     );
+
+    this.departamentoService.getDepartamentos().subscribe(
+      data => (this.departamentos = data),
+      err => console.log(err)
+    );
+  }
+
+  get f() {
+    return this.formVendedor.controls;
   }
 
   onSubmit() {
@@ -76,10 +82,15 @@ export class CompletarRegistroComponent implements OnInit {
       );
   }
 
-  onSubmitPN() {
-    this.pNaturalService.updatePersonaN(this.idPersonaN, this.formPersonaNatural.value).subscribe(
-      data => console.log(data),
-      err => console.log(err)
-    );
+  handlerMunicipios(id: number) {
+    if (!id) {
+      this.municipios = null;
+    } else {
+      this.f.Direccion.patchValue({ MunicipioId: null });
+      this.departamentoService.getMunicipios(id).subscribe(
+        data => (this.municipios = data),
+        err => console.log(err)
+      );
+    }
   }
 }

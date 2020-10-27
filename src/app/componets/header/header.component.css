@@ -10,7 +10,7 @@
 .navegacion {
   /* background: #f67503; */
   /* background: rgb(246, 117, 3); */
-  background: linear-gradient(180deg, rgba(246, 117, 3, 1) 30%, rgba(238, 173, 67, 1) 100%);
+  background: rgb(0, 217, 208);
 }
 .menu {
   display: flex;

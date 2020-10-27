@@ -22,8 +22,7 @@
                 <label for="rut">RUT: *</label>
                 <input type="text" class="form-control" id="rut" formControlName="rut" />
               </div>
-            </div>
-            <div class="form-row">
+
               <div class="form-group col-lg-6">
                 <label for="razonSocial">Razon social: *</label>
                 <input
@@ -42,42 +41,39 @@
           </div>
         </div>
 
-        <div class="card mb-4" formGroupName="direccion">
+        <div class="card mb-4" formGroupName="Direccion">
           <div class="card-header">Direccion</div>
           <div class="card-body">
             <div class="form-row">
               <div class="form-group col-lg-6">
-                <label for="pais">Pais:</label>
-                <input type="text" class="form-control" id="pais" formControlName="pais" />
-              </div>
-              <div class="form-group col-lg-6">
                 <label for="departamento">Departamento:</label>
-                <input
-                  type="text"
+                <select
                   class="form-control"
                   id="departamento"
-                  formControlName="departamento"
-                />
+                  #departamento
+                  (change)="handlerMunicipios(departamento.value)"
+                >
+                  <option [value]="null" selected disabled>Seleccione una opcion</option>
+                  <option *ngFor="let dep of departamentos" [value]="dep?.id">
+                    {{ dep.nombre }}
+                  </option>
+                </select>
               </div>
-            </div>
-
-            <div class="form-row">
               <div class="form-group col-lg-6">
                 <label for="municipio">Municipio:</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="municipio"
-                  formControlName="municipio"
-                />
+
+                <select class="form-control" id="municipio" formControlName="MunicipioId">
+                  <option [value]="null" disabled>Seleccione una opcion</option>
+                  <option *ngFor="let mun of municipios" [value]="mun?.id">
+                    {{ mun.nombre }}
+                  </option>
+                </select>
               </div>
+
               <div class="form-group col-lg-6">
                 <label for="barrio">Barrio:</label>
                 <input type="text" class="form-control" id="barrio" formControlName="barrio" />
               </div>
-            </div>
-
-            <div class="form-row">
               <div class="form-group col-lg-6">
                 <label for="direccion">Direccion:</label>
                 <input
@@ -91,99 +87,6 @@
           </div>
         </div>
 
-        <button class="btn btn-block btn-success" type="submit">Terminar registro</button>
-      </form>
-      <form [formGroup]="formPersonaNatural" (ngSubmit)="onSubmitPN()">
-        <div class="card mb-4">
-          <div class="card-header">Datos persona natural</div>
-          <div class="card-body">
-            <div class="form-row">
-              <div class="form-group col-lg-6">
-                <label for="nombre1">Primer nombre: *</label>
-                <input type="text" class="form-control" id="nombre1" formControlName="nombre1" />
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="nombre2">Segundo nombre:</label>
-                <input type="text" class="form-control" id="nombre2" formControlName="nombre2" />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-lg-6">
-                <label for="apellido1">Primer apellido: *</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="apellido1"
-                  formControlName="apellido1"
-                />
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="apellido2">Segundo apellido: *</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="apellido2"
-                  formControlName="apellido2"
-                />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-lg-6">
-                <label for="tipoDocumento">Tipo documento: *</label>
-                <select class="form-control" id="tipoDocumento" formControlName="tipoDocumento">
-                  <option [value]="null" disabled>Seleccione una opcion</option>
-                  <option value="CC">CC</option>
-                  <option value="EXTRANJERIA">EXTRANJERIA</option>
-                  <option value="PEP">PEP</option>
-                  <option value="PASAPORTE">PASAPORTE</option>
-                </select>
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="numDocumento">Numero de documento:</label>
-                <input
-                  type="tel"
-                  class="form-control"
-                  id="numDocumento"
-                  formControlName="numDocumento"
-                />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-lg-6">
-                <label for="sexo">Sexo: *</label>
-                <select class="form-control" id="sexo" formControlName="sexo">
-                  <option value="">Seleccione una opcion</option>
-                  <option value="MASCULINO">MASCULINO</option>
-                  <option value="FEMENINO">FEMENINO</option>
-                </select>
-              </div>
-
-              <div class="form-group col-lg-6">
-                <label for="fechaNacimiento">Fecha de nacimiento: *</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="fechaNacimiento"
-                  formControlName="fechaNacimiento"
-                />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-lg-6">
-                <label for="correo">Correo: *</label>
-                <input type="email" class="form-control" id="correo" formControlName="correo" />
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="telefono">Telefono: *</label>
-                <input type="tel" class="form-control" id="telefono" formControlName="telefono" />
-              </div>
-            </div>
-          </div>
-        </div>
         <button class="btn btn-block btn-success" type="submit">Terminar registro</button>
       </form>
     </div>
