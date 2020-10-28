@@ -24,6 +24,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/vendedores/vendedores.module').then(m => m.VendedoresModule)
   },
+  {
+    path: 'domiciliarios',
+    loadChildren: () =>
+      import('./modules/domiciliarios/domiciliarios.module').then(m => m.DomiciliariosModule)
+  },
   { path: '**', component: NoFoundComponent }
 ];
 

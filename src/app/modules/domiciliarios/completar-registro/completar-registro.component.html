@@ -1,0 +1,93 @@
+<div class="d-flex justify-content-center mb-4">
+  <a routerLink="">
+    <img src="assets/images/logo.png" height="100" width="auto" alt="Logo" class="logo" />
+  </a>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h3 class="text-center">Completar registro</h3>
+      <div class="card card-body mb-5">
+        <form [formGroup]="formDomiciliario" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+            <div class="form-group col-lg-6">
+              <label for="nombre1">Primer nombre: *</label>
+              <input type="text" class="form-control" id="nombre1" formControlName="nombre1" />
+            </div>
+            <div class="form-group col-lg-6">
+              <label for="nombre2">Segundo nombre:</label>
+              <input type="text" class="form-control" id="nombre2" formControlName="nombre2" />
+            </div>
+
+            <div class="form-group col-lg-6">
+              <label for="apellido1">Primer apellido: *</label>
+              <input type="text" class="form-control" id="apellido1" formControlName="apellido1" />
+            </div>
+            <div class="form-group col-lg-6">
+              <label for="apellido2">Segundo apellido: *</label>
+              <input type="text" class="form-control" id="apellido2" formControlName="apellido2" />
+            </div>
+
+            <div class="form-group col-lg-6">
+              <label for="sexo">Sexo: *</label>
+              <select class="form-control" id="sexo" formControlName="sexo">
+                <option [value]="null" disabled>Seleccione una opción</option>
+                <option value="MASCULINO">MASCULINO</option>
+                <option value="FEMENINO">FEMENINO</option>
+              </select>
+            </div>
+            <div class="form-group col-lg-6">
+              <label for="fechaNacimiento">Fecha de nacimiento: *</label>
+              <input
+                type="date"
+                class="form-control"
+                id="fechaNacimiento"
+                formControlName="fechaNacimiento"
+              />
+            </div>
+
+            <div class="form-group col-lg-6">
+              <label for="telefono">Telefono: *</label>
+              <input type="tel" class="form-control" id="telefono" formControlName="telefono" />
+            </div>
+
+            <div class="form-group col-lg-6">
+              <label for="tipoTransporte">Tipo transporte: *</label>
+              <select class="form-control" id="tipoTransporte" formControlName="tipoTransporte">
+                <option [value]="null" disabled>Seleccione una opción</option>
+                <option value="MOTO">MOTO</option>
+                <option value="CARRO">CARRO</option>
+                <option value="AVION">AVION</option>
+                <option value="BICICLETA">BICICLETA</option>
+                <option value="BARCO">BARCO</option>
+              </select>
+            </div>
+            <div class="form-group col-lg-6">
+              <label for="placaTransporte">Placa del transporte: *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="placaTransporte"
+                formControlName="placaTransporte"
+              />
+            </div>
+            <div class="form-group col-lg-6">
+              <label for="colorTransporte">Color del transporte: *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="colorTransporte"
+                formControlName="colorTransporte"
+              />
+            </div>
+          </div>
+
+          <button class="btn btn-success btn-block btn-lg mb-2" type="submit">
+            {{ isLoading ? 'Cargando...' : 'Guardar' }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -30,6 +30,15 @@ const routes: Routes = [
         data: { expectedUsuario: 'VENDEDOR' }
       },
       {
+        path: 'login-domiciliario',
+        loadChildren: () =>
+          import('./login-domiciliario/login-domiciliario.module').then(
+            m => m.LoginDomiciliarioModule
+          ),
+        canActivate: [LoginGuard],
+        data: { expectedUsuario: 'DOMICILIARIO' }
+      },
+      {
         path: 'register',
         loadChildren: () => import('./register/register.module').then(m => m.RegisterModule),
         canActivate: [LoginGuard],

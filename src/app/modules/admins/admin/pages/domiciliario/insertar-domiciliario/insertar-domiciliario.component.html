@@ -1,0 +1,30 @@
+<h3>Insertar Domiciliario</h3>
+<hr />
+
+<form [formGroup]="formDomiciliario" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <div class="form-group col-lg-6">
+      <label for="tipoDocumento">Tipo de documento:*</label>
+      <select formControlName="tipoDocumento" class="form-control" id="tipoDocumento">
+        <option [value]="null">Seleccione una opción</option>
+        <option value="CC">CC</option>
+        <option value="EXTRANJERIA">EXTRANJERIA</option>
+        <option value="PEP">PEP</option>
+        <option value="PASAPORTE">PASAPORTE</option>
+      </select>
+    </div>
+    <div class="form-group col-lg-6">
+      <label for="numDocumento">Numero de documento:*</label>
+      <input type="tel" formControlName="numDocumento" class="form-control" id="numDocumento" />
+    </div>
+    <div class="form-group col-lg-6">
+      <label for="correo">Correo:*</label>
+      <input type="email" formControlName="correo" class="form-control" id="correo" />
+    </div>
+    <div class="form-group col-lg-6">
+      <label for="telefono">Telefono:*</label>
+      <input type="tel" formControlName="telefono" class="form-control" id="telefono" />
+    </div>
+  </div>
+  <button class="btn btn-success">Insertar domiciliario</button>
+</form>

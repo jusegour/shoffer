@@ -1,1 +1,39 @@
-<p>lista-vendedores works!</p>
+<h3>Lista Vendedores</h3>
+<hr />
+
+<div class="form-row justify-content-end">
+  <div class="form-group col-lg-4">
+    <input type="text" placeholder="Busqueda por NIT" class="form-control" #search (input)="(0)" />
+  </div>
+</div>
+
+<div class="table-responsive table-sm">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">NIT</th>
+        <th scope="col">RUT</th>
+        <th scope="col">RAZON SOCIAL</th>
+        <th scope="col">SITIO WEB</th>
+        <th scope="col">ACCION</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let vendedor of vendedores | filtro: search.value; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ vendedor.nit }}</td>
+        <td>{{ vendedor.rut }}</td>
+        <td>{{ vendedor.razonSocial }}</td>
+        <td>{{ vendedor.sitioWeb }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary">View</button>
+          <button class="btn btn-sm btn-primary ml-2" (click)="onDelete(vendedor.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
