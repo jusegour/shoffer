@@ -1,8 +1,8 @@
 {
   "name": "ShOfferApp",
   "short_name": "ShOffer",
-  "theme_color": "#00d9d0",
-  "background_color": "#00d9d0",
+  "theme_color": "#00e0d9",
+  "background_color": "#00e0d9",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
