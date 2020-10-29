@@ -9,7 +9,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FiltroPipe } from './lista-vendedores/filtro.pipe';
 
 @NgModule({
-  declarations: [VendedorComponent, InsertarVendedorComponent, ListaVendedoresComponent, FiltroPipe],
+  declarations: [
+    VendedorComponent,
+    InsertarVendedorComponent,
+    ListaVendedoresComponent,
+    FiltroPipe
+  ],
   imports: [CommonModule, VendedorRoutingModule, ReactiveFormsModule]
 })
 export class VendedorModule {}

@@ -9,4 +9,4 @@ const routes: Routes = [{ path: '', component: LoginDomiciliarioComponent }];
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class LoginDomiciliarioRoutingModule { }
+export class LoginDomiciliarioRoutingModule {}

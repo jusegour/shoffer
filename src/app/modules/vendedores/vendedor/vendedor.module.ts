@@ -4,12 +4,8 @@ import { CommonModule } from '@angular/common';
 import { VendedorRoutingModule } from './vendedor-routing.module';
 import { VendedorComponent } from './vendedor.component';
 
-
 @NgModule({
   declarations: [VendedorComponent],
-  imports: [
-    CommonModule,
-    VendedorRoutingModule
-  ]
+  imports: [CommonModule, VendedorRoutingModule]
 })
-export class VendedorModule { }
+export class VendedorModule {}

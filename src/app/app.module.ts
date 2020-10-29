@@ -8,10 +8,21 @@ import { HeaderModule } from './componets/header/header.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
 import { NoFoundComponent } from './componets/no-found/no-found.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NoFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, HeaderModule, ReactiveFormsModule, CoreModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HeaderModule,
+    ReactiveFormsModule,
+    CoreModule,
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

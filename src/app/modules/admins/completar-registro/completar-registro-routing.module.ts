@@ -9,4 +9,4 @@ const routes: Routes = [{ path: '', component: CompletarRegistroComponent }];
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CompletarRegistroRoutingModule { }
+export class CompletarRegistroRoutingModule {}
