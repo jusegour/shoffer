@@ -10,6 +10,17 @@ import { environment } from 'src/environments/environment';
 export class VendedorService {
   constructor(private http: HttpClient) {}
 
+  searchVendedores(q?: string, page?: number, limit?: number): Observable<any> {
+    const url = new URLSearchParams({
+      q: q || '',
+      page: page || 1,
+      limit: limit || 1
+    } as any);
+    return this.http
+      .get(environment.urlBackend + `vendedores/search?${url}`)
+      .pipe(map(data => data));
+  }
+
   getVendedores(): Observable<any> {
     return this.http.get(environment.urlBackend + `vendedores`).pipe(map(data => data));
   }
