@@ -38,14 +38,14 @@
   </table>
   <nav aria-label="...">
     <ul class="pagination">
-      <li class="page-item" [class.disabled]="!pagination?.prev">
-        <button class="page-link" (click)="getVendedores(pagination?.next)">Previous</button>
+      <li class="page-item" [class.disabled]="!pagination?.previousPage">
+        <button class="page-link" (click)="getVendedores(pagination?.nextPage)">Previous</button>
       </li>
       <li class="page-item" *ngFor="let page of pagination?.total">
         <button class="page-link" href="#">{{ page | json }}</button>
       </li>
-      <li class="page-item" [class.disabled]="!pagination?.next">
-        <button class="page-link" (click)="getVendedores(pagination?.next)">Next</button>
+      <li class="page-item" [class.disabled]="!pagination?.nextPage">
+        <button class="page-link" (click)="getVendedores(pagination?.nextPage)">Next</button>
       </li>
     </ul>
   </nav>

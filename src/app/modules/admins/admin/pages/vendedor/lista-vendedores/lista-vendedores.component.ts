@@ -4,9 +4,11 @@ import { fromEvent, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, exhaustMap, catchError } from 'rxjs/operators';
 
 interface Pagination {
-  next: number;
-  prev: number;
+  previousPage: number;
+  currentPage: number;
+  nextPage: number;
   total: number;
+  limit: number;
 }
 
 @Component({

@@ -1,8 +1,8 @@
 {
-  "name": "shoffer",
-  "short_name": "shoffer",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "ShOfferApp",
+  "short_name": "ShOffer",
+  "theme_color": "#00d9d0",
+  "background_color": "#00d9d0",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

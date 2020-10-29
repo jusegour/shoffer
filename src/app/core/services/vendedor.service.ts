@@ -14,7 +14,7 @@ export class VendedorService {
     const url = new URLSearchParams({
       q: q || '',
       page: page || 1,
-      limit: limit || 1
+      limit: limit || 10
     } as any);
     return this.http
       .get(environment.urlBackend + `vendedores/search?${url}`)
