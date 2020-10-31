@@ -1,4 +1,4 @@
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
   .container,
   .container-sm,
   .container-md,
@@ -13,16 +13,17 @@
 .menu {
   display: flex;
   padding: 10px 0;
+  flex-wrap: wrap;
 }
 
 .sub-menu {
   display: flex;
   justify-content: flex-end;
   list-style: none;
+  flex-wrap: wrap;
 }
 
 .sub-menu li a {
-  /* display: block; */
   color: white;
   text-decoration: none !important;
   margin-left: 90px;
@@ -34,6 +35,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .btn-grupo {
@@ -41,6 +43,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .btn-grupo span {
@@ -61,6 +64,7 @@
   height: 50px;
   border-radius: 20px;
   margin: auto;
+  flex-wrap: wrap;
 }
 
 .input-grupo input {
@@ -83,12 +87,14 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .menu-principal {
   display: flex;
   justify-content: space-between;
   list-style: none;
+  flex-wrap: wrap;
 }
 
 .menu-principal-link {
@@ -99,4 +105,20 @@
 .logo {
   box-shadow: 1px 3px 5px 0px white;
   border-radius: 15px;
+} */
+
+.btn-grupo {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.btn-grupo span {
+  font-size: 23px;
+}
+.btn-grupo p {
+  margin: 0;
+  font-size: 11px;
 }

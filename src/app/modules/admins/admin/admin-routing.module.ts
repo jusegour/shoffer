@@ -16,6 +16,11 @@ const routes: Routes = [
         path: 'domiciliario',
         loadChildren: () =>
           import('./pages/domiciliario/domiciliario.module').then(m => m.DomiciliarioModule)
+      },
+      {
+        path: 'categoria',
+        loadChildren: () =>
+          import('./pages/categoria/categoria.module').then(m => m.CategoriaModule)
       }
     ]
   }

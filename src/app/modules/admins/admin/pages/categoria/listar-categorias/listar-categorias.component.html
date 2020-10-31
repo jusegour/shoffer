@@ -1,0 +1,53 @@
+<h3>Lista Categorias</h3>
+<hr />
+
+<div class="form-row justify-content-end">
+  <div class="form-group col-lg-4">
+    <input type="text" placeholder="Busqueda por NIT" class="form-control" id="inputSearch" />
+  </div>
+</div>
+
+<div class="table-responsive table-sm">
+  <table class="table">
+    <thead class="text-capitalize">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Creada</th>
+        <th scope="col">Accion</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let cat of categorias | slice: lowValue:highValue; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ cat.nombre }}</td>
+        <td>
+          <span
+            class="badge text-lowercase"
+            [class]="{
+              'badge-secondary': cat.estado == 'INACTIVA',
+              'badge-success': cat.estado == 'ACTIVA',
+              'badge-primary': cat.estado == 'VACIA'
+            }"
+            >{{ cat.estado }}</span
+          >
+        </td>
+        <td>{{ cat.createdAt | date }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary">View</button>
+          <button class="btn btn-sm btn-danger ml-2" (click)="onDelete(cat.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <mat-paginator
+    [length]="pagination?.total"
+    [pageSize]="pagination?.limit"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="setPageSizeOptions($event)"
+  >
+  </mat-paginator>
+</div>

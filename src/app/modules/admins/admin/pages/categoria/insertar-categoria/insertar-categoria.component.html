@@ -1,0 +1,16 @@
+<h3>Insertar Categoria</h3>
+<hr />
+<div class="row">
+  <div class="col-lg-7">
+    <form [formGroup]="formCategoria" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input formControlName="nombre" type="text" class="form-control" />
+      </div>
+
+      <button class="btn btn-success" [disabled]="isLoading" type="submit">
+        {{ isLoading ? 'Cargando...' : 'Insertar' }}
+      </button>
+    </form>
+  </div>
+</div>

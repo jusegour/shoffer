@@ -1,20 +1,20 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { VendedorService } from 'src/app/core/services/vendedor.service';
-import { fromEvent, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, exhaustMap, catchError } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { fromEvent, of } from 'rxjs';
+import { map, debounceTime, distinctUntilChanged, exhaustMap, catchError } from 'rxjs/operators';
 import { Pagination } from '@app/interfaces/pagination';
+import { CategoriaService } from '@app/core/services/categoria.service';
 
 @Component({
-  templateUrl: './lista-vendedores.component.html',
-  styleUrls: ['./lista-vendedores.component.css']
+  templateUrl: './listar-categorias.component.html',
+  styleUrls: ['./listar-categorias.component.css']
 })
-export class ListaVendedoresComponent implements OnInit, AfterViewInit {
-  vendedores: Array<any>;
+export class ListarCategoriasComponent implements OnInit {
+  categorias: Array<any>;
   pagination: Pagination;
   keyword: string;
 
-  constructor(private vendedorService: VendedorService) {}
+  constructor(private categoriaService: CategoriaService) {}
 
   ngAfterViewInit(): void {
     fromEvent(document.getElementById('inputSearch'), 'input')
@@ -24,14 +24,14 @@ export class ListaVendedoresComponent implements OnInit, AfterViewInit {
         distinctUntilChanged(),
         exhaustMap(keyword => {
           this.keyword = keyword;
-          return this.vendedorService
-            .searchVendedores(keyword)
+          return this.categoriaService
+            .searchCategorias(keyword)
             .pipe(catchError(_ => of('keep on searching!!!')));
         })
       )
       .subscribe(
         ({ results, info }) => {
-          this.vendedores = results;
+          this.categorias = results;
           this.pagination = info;
         },
         err => console.log(err)
@@ -39,7 +39,7 @@ export class ListaVendedoresComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getVendedores();
+    this.getCategorias();
   }
 
   lowValue: number = 0;
@@ -50,10 +50,10 @@ export class ListaVendedoresComponent implements OnInit, AfterViewInit {
     this.highValue = this.lowValue + pageEvent.pageSize;
   }
 
-  getVendedores(page?: number, limit?: number) {
-    this.vendedorService.searchVendedores(this.keyword, page, limit).subscribe(
+  getCategorias(page?: number, limit?: number) {
+    this.categoriaService.searchCategorias(this.keyword, page, limit).subscribe(
       ({ results, info }) => {
-        this.vendedores = results;
+        this.categorias = results;
         this.pagination = info;
       },
       err => console.log(err)
@@ -65,10 +65,10 @@ export class ListaVendedoresComponent implements OnInit, AfterViewInit {
       return null;
     }
 
-    this.vendedorService.deleteVendedor(id).subscribe(
+    this.categoriaService.deleteCategoria(id).subscribe(
       () => {
         alert('borrado con exito');
-        this.getVendedores();
+        this.getCategorias();
       },
       err => console.log(err)
     );

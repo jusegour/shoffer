@@ -3,7 +3,18 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { VendedorComponent } from './vendedor.component';
 
-const routes: Routes = [{ path: '', component: VendedorComponent }];
+const routes: Routes = [
+  {
+    path: '',
+    component: VendedorComponent,
+    children: [
+      {
+        path: 'producto',
+        loadChildren: () => import('./pages/producto/producto.module').then(m => m.ProductoModule)
+      }
+    ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

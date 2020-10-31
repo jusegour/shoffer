@@ -21,7 +21,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let vendedor of vendedores; index as i">
+      <tr *ngFor="let vendedor of vendedores | slice: lowValue:highValue; index as i">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ vendedor.nit }}</td>
         <td>{{ vendedor.rut }}</td>
@@ -29,24 +29,17 @@
         <td>{{ vendedor.sitioWeb }}</td>
         <td>
           <button class="btn btn-sm btn-primary">View</button>
-          <button class="btn btn-sm btn-primary ml-2" (click)="onDelete(vendedor.id)">
-            Delete
-          </button>
+          <button class="btn btn-sm btn-danger ml-2" (click)="onDelete(vendedor.id)">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
-  <nav aria-label="...">
-    <ul class="pagination">
-      <li class="page-item" [class.disabled]="!pagination?.previousPage">
-        <button class="page-link" (click)="getVendedores(pagination?.nextPage)">Previous</button>
-      </li>
-      <li class="page-item" *ngFor="let page of pagination?.total">
-        <button class="page-link" href="#">{{ page | json }}</button>
-      </li>
-      <li class="page-item" [class.disabled]="!pagination?.nextPage">
-        <button class="page-link" (click)="getVendedores(pagination?.nextPage)">Next</button>
-      </li>
-    </ul>
-  </nav>
+
+  <mat-paginator
+    [length]="pagination?.total"
+    [pageSize]="pagination?.limit"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="setPageSizeOptions($event)"
+  >
+  </mat-paginator>
 </div>

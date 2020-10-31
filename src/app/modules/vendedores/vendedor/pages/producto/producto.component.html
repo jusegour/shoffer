@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="list-group">
+        <a
+          routerLink="insertar"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action"
+        >
+          Insertar Producto
+        </a>
+        <a
+          routerLink="listar"
+          routerLinkActive="active"
+          class="list-group-item list-group-item-action"
+          >Lista Productos</a
+        >
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,8 @@ import { VendedorService } from './services/vendedor.service';
 import { PersonaNaturalService } from './services/persona-natural.service';
 import { DepartamentoService } from './services/departamento.service';
 import { DomiciliarioService } from './services/domiciliario.service';
+import { CategoriaService } from './services/categoria.service';
+import { ProductoService } from './services/producto.service';
 
 @NgModule({
   providers: [
@@ -16,7 +18,9 @@ import { DomiciliarioService } from './services/domiciliario.service';
     VendedorService,
     PersonaNaturalService,
     DepartamentoService,
-    DomiciliarioService
+    DomiciliarioService,
+    CategoriaService,
+    ProductoService
   ],
   imports: [HttpClientModule]
 })

@@ -1,0 +1,39 @@
+<h3>Insertar Producto</h3>
+<hr />
+<form [formGroup]="formProducto" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <div class="form-group col-lg-6">
+      <label for="nombre">Nombre:*</label>
+      <input formControlName="nombre" type="text" class="form-control" />
+    </div>
+    <div class="form-group col-lg-6">
+      <label for="descripcion">Descripcion:*</label>
+      <input formControlName="descripcion" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group col-lg-6">
+      <label for="valorUnitario">Valor unitario:*</label>
+      <input formControlName="valorUnitario" type="number" class="form-control" />
+    </div>
+    <div class="form-group col-lg-6">
+      <label for="cantDisponible">Cantidad disponible:*</label>
+      <input formControlName="cantDisponible" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group col-lg-6">
+      <label for="detallePromocion">Detalle promocion:*</label>
+      <input formControlName="detallePromocion" type="text" class="form-control" />
+    </div>
+    <div class="form-group col-lg-6">
+      <label for="CategoriaId">Categorias:*</label>
+      <select formControlName="CategoriaId" class="form-control" id="CategoriaId">
+        <option value="null" disabled>Seleccione una opción</option>
+        <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="btn btn-success" [disabled]="isLoading" type="submit">
+    {{ isLoading ? 'Cargando...' : 'Insertar' }}
+  </button>
+</form>
