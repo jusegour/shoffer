@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { setAccessToken } from '@app/auth';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -8,14 +10,16 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class ConsumidorComponent implements OnInit {
   nombre: string;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.nombre = this.authService.getNombreUsuario('CONSUMIDOR');
   }
 
   logout() {
-    localStorage.removeItem('CONSUMIDOR_TOKEN');
-    location.reload();
+    setAccessToken(null);
+    this.router.navigate(['']);
+    // localStorage.removeItem('CONSUMIDOR_TOKEN');
+    // location.reload();
   }
 }

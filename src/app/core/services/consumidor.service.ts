@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -26,7 +26,19 @@ export class ConsumidorService {
 
   login(data: any): Observable<any> {
     return this.http
-      .post(environment.urlBackend + `auth/login-consumidor`, data)
+      .post(environment.urlBackend + `auth/login-consumidor`, data, {
+        withCredentials: true
+      })
+      .pipe(map(data => data));
+  }
+
+  refreshToken(data: any): Observable<any> {
+    return this.http
+      .post(environment.urlBackend + `auth/refresh_token`, data, {
+        headers: new HttpHeaders({
+          credentials: 'include'
+        })
+      })
       .pipe(map(data => data));
   }
 }

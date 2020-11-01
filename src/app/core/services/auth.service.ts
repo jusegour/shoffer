@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-
 import jwt_decode from 'jwt-decode';
+
+import { getAccesToken, setAccessToken } from '@app/auth';
 
 type TipoUsuario = 'CONSUMIDOR' | 'ADMIN' | 'DOMICILIARIO' | 'VENDEDOR';
 
@@ -12,13 +13,12 @@ export class AuthService {
 
   isAuthenticated(tipoUsuario: TipoUsuario) {
     try {
-      const token = localStorage.getItem(`${tipoUsuario}_TOKEN`);
-
+      const token = getAccesToken();
       if (token) {
         const { exp } = jwt_decode(token);
         const isTokenExpired = new Date().getTime() > exp * 1000;
         if (isTokenExpired) {
-          this.removerTokens(tipoUsuario);
+          setAccessToken(null);
           return false;
         }
         return true;
@@ -32,12 +32,13 @@ export class AuthService {
 
   getEstadoUsuario(tipoUsuario: TipoUsuario) {
     try {
-      const token = localStorage.getItem(`${tipoUsuario}_TOKEN`);
+      const token = getAccesToken();
+      // const token = localStorage.getItem(`${tipoUsuario}_TOKEN`);
       if (token) {
         const { estado } = jwt_decode(token);
         return estado;
       } else {
-        this.removerTokens(tipoUsuario);
+        setAccessToken(null);
       }
     } catch (err) {
       return null;
