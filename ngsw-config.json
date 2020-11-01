@@ -21,7 +21,7 @@
   "dataGroups": [
     {
       "name": "backend",
-      "urls": ["/shipments"],
+      "urls": ["https://shoffer.herokuapp.com/api/**"],
       "cacheConfig": {
         "strategy": "performance",
         "maxSize": 100,
