@@ -9,12 +9,14 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '@app/core/services/auth.service';
+import { getAccesToken } from '@app/auth';
+import { ConsumidorService } from '@app/core/services/consumidor.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private consumidorService: ConsumidorService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
@@ -22,8 +24,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (err.status === 401) {
           // auto logout if 401 response returned from api
           if (this.authService.isAuthenticated('CONSUMIDOR')) {
-            // this.authService.logout('AD');
-            // location.reload(true);
+            this.consumidorService.logout();
           } else {
             // this.authService.logout('AD');
           }
@@ -38,7 +39,11 @@ export class ErrorInterceptor implements HttpInterceptor {
           console.error('An error occurred:', err.error);
         }
 
-        const error = err.error || err.statusText;
+        const error = {
+          status: err.status,
+          message: err.error.message || err.statusText
+        };
+
         return throwError(error);
       })
     );

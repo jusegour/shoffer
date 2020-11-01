@@ -1,4 +1,4 @@
-/* @media (min-width: 1200px) {
+@media (min-width: 1200px) {
   .container,
   .container-sm,
   .container-md,
@@ -105,8 +105,8 @@
 .logo {
   box-shadow: 1px 3px 5px 0px white;
   border-radius: 15px;
-} */
-
+}
+/* 
 .btn-grupo {
   justify-content: center;
   align-items: center;
@@ -121,4 +121,4 @@
 .btn-grupo p {
   margin: 0;
   font-size: 11px;
-}
+} */

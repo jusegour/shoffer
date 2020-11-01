@@ -3,6 +3,7 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable } from 'rxjs';
 import { AuthService } from '@app/core/services/auth.service';
 import { environment } from '@env/environment';
+import { getAccesToken } from '@app/auth';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -14,7 +15,7 @@ export class TokenInterceptor implements HttpInterceptor {
     if (url && this.authService.isAuthenticated('CONSUMIDOR')) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${localStorage.getItem('AD_TOKEN')}`
+          Authorization: `Bearer ${getAccesToken()}`
         }
       });
     }

@@ -22,7 +22,9 @@ export class CategoriaService {
   }
 
   getCategorias(): Observable<any> {
-    return this.http.get(environment.urlBackend + `categorias`).pipe(map(data => data));
+    return this.http
+      .get(environment.urlBackend + `categorias`, { withCredentials: true })
+      .pipe(map(data => data));
   }
 
   storeCategoria(data: any): Observable<any> {

@@ -28,28 +28,13 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.consumidorService.login(this.formLogin.value).subscribe(
-      data => {
-        console.log(data);
-
-        setAccessToken(data.accessToken);
+      ({ accessToken }) => {
+        setAccessToken(accessToken);
 
         // localStorage.setItem('CONSUMIDOR_TOKEN', data.token);
-        // this.router.navigate([this.returnUrl || '/consumidores']);
+        this.router.navigate([this.returnUrl || '/consumidores']);
       },
       err => console.log(err)
     );
-  }
-
-  f() {
-    console.log(getAccesToken());
-
-    setTimeout(() => {
-      this.consumidorService.refreshToken().subscribe(
-        ({ accessToken }) => {
-          setAccessToken(accessToken);
-        },
-        err => console.log(err)
-      );
-    }, 2000);
   }
 }

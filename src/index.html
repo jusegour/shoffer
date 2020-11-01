@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
     <meta charset="utf-8" />
     <title>Shoffer</title>
@@ -20,8 +20,15 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <meta name="theme-color" content="#00e0d9" />
   </head>
-  <body>
-    <app-root></app-root>
+  <body class="h-100">
+    <app-root>
+      <div class="h-100 d-flex justify-content-center align-items-center">
+        <div class="lds-ripple">
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </app-root>
     <noscript>Please enable JavaScript to continue using this application.</noscript>
   </body>
 </html>

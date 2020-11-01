@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { setAccessToken } from '@app/auth';
+import { CategoriaService } from '@app/core/services/categoria.service';
+import { ConsumidorService } from '@app/core/services/consumidor.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -10,16 +10,24 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class ConsumidorComponent implements OnInit {
   nombre: string;
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private consumidorService: ConsumidorService,
+    private ca: CategoriaService
+  ) {}
 
   ngOnInit(): void {
     this.nombre = this.authService.getNombreUsuario('CONSUMIDOR');
   }
 
   logout() {
-    setAccessToken(null);
-    this.router.navigate(['']);
-    // localStorage.removeItem('CONSUMIDOR_TOKEN');
-    // location.reload();
+    this.consumidorService.logout();
+  }
+
+  f() {
+    this.ca.getCategorias().subscribe(
+      data => console.log(data),
+      err => console.log(err)
+    );
   }
 }
