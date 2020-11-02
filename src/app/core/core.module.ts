@@ -10,6 +10,10 @@ import { DomiciliarioService } from './services/domiciliario.service';
 import { CategoriaService } from './services/categoria.service';
 import { ProductoService } from './services/producto.service';
 
+import { LogUpdateService } from './services/sw/log-update.service';
+import { CheckForUpdateService } from './services/sw/check-for-update.service';
+import { PromptUpdateService } from './services/sw/prompt-update.service';
+
 @NgModule({
   providers: [
     ConsumidorService,
@@ -20,7 +24,10 @@ import { ProductoService } from './services/producto.service';
     DepartamentoService,
     DomiciliarioService,
     CategoriaService,
-    ProductoService
+    ProductoService,
+    LogUpdateService,
+    CheckForUpdateService,
+    PromptUpdateService
   ],
   imports: [HttpClientModule]
 })
