@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
+import { ApplicationRef, Component } from '@angular/core';
+import { SwUpdate, UpdateAvailableEvent } from '@angular/service-worker';
+import { interval, concat } from 'rxjs';
+import { first } from 'rxjs/operators';
+
+function promptUser(_event: UpdateAvailableEvent): boolean {
+  return true;
+}
 
 @Component({
   selector: 'app-root',
@@ -7,14 +13,22 @@ import { SwUpdate } from '@angular/service-worker';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  updateCheckText = '';
+  constructor(appRef: ApplicationRef, updates: SwUpdate) {
+    // Allow the app to stabilize first, before starting polling for updates with `interval()`.
+    const appIsStable$ = appRef.isStable.pipe(first(isStable => isStable === true));
+    const everySixHours$ = interval(6 * 60 * 60 * 1000);
+    const everySixHoursOnceAppIsStable$ = concat(appIsStable$, everySixHours$);
 
-  constructor(private update: SwUpdate) {}
+    everySixHoursOnceAppIsStable$.subscribe(() => {
+      updates.checkForUpdate();
+    });
 
-  updateCheck(): void {
-    this.update
-      .checkForUpdate()
-      .then(() => (this.updateCheckText = 'resolved'))
-      .catch(err => (this.updateCheckText = `rejected: ${err.message}`));
+    updates.available.subscribe(event => {
+      if (promptUser(event)) {
+        updates.activateUpdate().then(() => {
+          document.location.reload();
+        });
+      }
+    });
   }
 }

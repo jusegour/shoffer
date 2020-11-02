@@ -12,7 +12,7 @@ export class DomiciliarioGuard implements CanActivate {
     const expectedEstado = route.data.expectedEstado;
     const currentEstado = this.authService.getEstadoUsuario('DOMICILIARIO');
 
-    if (expectedEstado != currentEstado) {
+    if (currentEstado && expectedEstado != currentEstado) {
       switch (currentEstado) {
         case 'ESPERA':
           this.router.navigate(['/domiciliarios/completar-registro']);

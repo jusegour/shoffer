@@ -12,7 +12,7 @@ export class VendedorGuard implements CanActivate {
     const expectedEstado = route.data.expectedEstado;
     const currentEstado = this.authService.getEstadoUsuario('VENDEDOR');
 
-    if (expectedEstado != currentEstado) {
+    if (currentEstado && expectedEstado != currentEstado) {
       switch (currentEstado) {
         case 'ESPERA':
           this.router.navigate(['/vendedores/completar-registro']);

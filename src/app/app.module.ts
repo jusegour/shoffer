@@ -28,8 +28,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: APP_INITIALIZER, useFactory: appInitializer, deps: [ConsumidorService], multi: true }
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializer,
+      deps: [ConsumidorService],
+      multi: true
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
