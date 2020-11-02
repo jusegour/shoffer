@@ -17,16 +17,5 @@
         "files": ["/assets/**", "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"]
       }
     }
-  ],
-  "dataGroups": [
-    {
-      "name": "backend",
-      "urls": ["https://shoffer.herokuapp.com/api/**"],
-      "cacheConfig": {
-        "strategy": "performance",
-        "maxSize": 100,
-        "maxAge": "3d"
-      }
-    }
   ]
 }
