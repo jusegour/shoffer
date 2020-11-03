@@ -17,5 +17,16 @@
         "files": ["/assets/**", "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "endpoint",
+      "urls": ["!/api/auth/refresh_token"],
+      "cacheConfig": {
+        "maxSize": 0,
+        "maxAge": "0u",
+        "strategy": "freshness"
+      }
+    }
   ]
 }
