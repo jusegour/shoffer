@@ -31,6 +31,27 @@
         <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</option>
       </select>
     </div>
+
+    <div class="form-group col-lg-12">
+      <label for="fotos">Imagenes:*</label>
+      <input type="file" multiple max="7" (input)="handlerFile($event)" />
+    </div>
+  </div>
+
+  <div *ngFor="let progressInfo of progressInfos" class="mb-2">
+    <span>{{ progressInfo.fileName }}</span>
+    <div class="progress">
+      <div
+        class="progress-bar progress-bar-info progress-bar-striped"
+        role="progressbar"
+        attr.aria-valuenow="{{ progressInfo.value }}"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [ngStyle]="{ width: progressInfo.value + '%' }"
+      >
+        {{ progressInfo.value }}%
+      </div>
+    </div>
   </div>
 
   <button class="btn btn-success" [disabled]="isLoading" type="submit">

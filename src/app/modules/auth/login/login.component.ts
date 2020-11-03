@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConsumidorService } from 'src/app/core/services/consumidor.service';
-import { getAccesToken, setAccessToken } from '@app/auth';
 
 @Component({
   selector: 'app-login',
@@ -28,10 +27,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.consumidorService.login(this.formLogin.value).subscribe(
-      ({ accessToken }) => {
-        setAccessToken(accessToken);
-
-        // localStorage.setItem('CONSUMIDOR_TOKEN', data.token);
+      ({ token }) => {
+        localStorage.setItem('CONSUMIDOR_TOKEN', token);
         this.router.navigate([this.returnUrl || '/consumidores']);
       },
       err => console.log(err)

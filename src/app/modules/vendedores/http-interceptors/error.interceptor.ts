@@ -21,11 +21,13 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
           // auto logout if 401 response returned from api
-          if (this.authService.isAuthenticated('CONSUMIDOR')) {
-            this.authService.logout('CONSUMIDOR');
+          if (this.authService.isAuthenticated('VENDEDOR')) {
+            this.authService.logout('VENDEDOR');
           } else {
             // this.authService.logout('AD');
           }
+
+          location.reload(true);
         }
 
         if (err.error instanceof ErrorEvent) {

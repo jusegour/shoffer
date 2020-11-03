@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { setAccessToken } from '@app/auth';
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -10,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ConsumidorService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   getConsumidor(id: number): Observable<any> {
     return this.http.get(environment.urlBackend + `consumidores/${id}`).pipe(map(data => data));
@@ -28,25 +26,7 @@ export class ConsumidorService {
 
   login(data: any): Observable<any> {
     return this.http
-      .post(environment.urlBackend + `auth/login-consumidor`, data, {
-        withCredentials: true
-      })
-      .pipe(map(data => data));
-  }
-
-  logout() {
-    this.http
-      .post(environment.urlBackend + `auth/logout`, null, {
-        withCredentials: true
-      })
-      .subscribe();
-    setAccessToken(null);
-    this.router.navigate(['/']);
-  }
-
-  refreshToken(): Observable<any> {
-    return this.http
-      .post(environment.urlBackend + `auth/refresh_token`, null, { withCredentials: true })
+      .post(environment.urlBackend + `auth/login-consumidor`, data)
       .pipe(map(data => data));
   }
 }

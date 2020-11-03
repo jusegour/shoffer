@@ -28,7 +28,6 @@ export class LoginAdminComponent implements OnInit {
   onSubmit() {
     this.adminService.login(this.formLogin.value).subscribe(
       data => {
-        alert(data.message);
         localStorage.setItem('ADMIN_TOKEN', data.token);
         this.router.navigate([this.returnUrl || '/admins']);
       },

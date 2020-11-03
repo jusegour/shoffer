@@ -25,8 +25,13 @@ export class ProductoService {
     return this.http.get(environment.urlBackend + `productos`).pipe(map(data => data));
   }
 
-  storeProducto(data: any): Observable<any> {
-    return this.http.post(environment.urlBackend + `productos`, data).pipe(map(data => data));
+  storeProducto(formData: FormData): Observable<any> {
+    return this.http
+      .post(environment.urlBackend + `productos`, formData, {
+        observe: 'events',
+        reportProgress: true
+      })
+      .pipe(map(data => data));
   }
 
   deleteProducto(id: number): Observable<any> {

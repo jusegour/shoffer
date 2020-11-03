@@ -11,10 +11,10 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const url = request.url.startsWith(environment.urlBackend);
 
-    if (url && this.authService.isAuthenticated('CONSUMIDOR')) {
+    if (url && this.authService.isAuthenticated('VENDEDOR')) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${localStorage.getItem('CONSUMIDOR_TOKEN')}`
+          Authorization: `Bearer ${localStorage.getItem('VENDEDOR_TOKEN')}`
         }
       });
     }
