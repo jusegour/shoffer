@@ -47,12 +47,12 @@ export class AuthService {
 
   getNombreUsuario(tipoUsuario: TipoUsuario): string {
     try {
-      const token = localStorage.getItem(`${tipoUsuario}_TOKEN`);
+      const token = getAccesToken();
       if (token) {
         const { nombre } = jwt_decode(token);
         return nombre;
       } else {
-        this.removerTokens(tipoUsuario);
+        setAccessToken(null);
       }
     } catch (err) {
       return null;
