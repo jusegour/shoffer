@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConsumidorService } from 'src/app/core/services/consumidor.service';
 
@@ -15,16 +15,20 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private consumidorService: ConsumidorService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formConsumidor = this.fb.group({
-      nombre1: [null],
-      apellido1: [null],
-      correo: [null],
-      password: [null],
-      repetPassword: [null]
+      nombre1: [null, [Validators.required]],
+      apellido1: [null, [Validators.required]],
+      correo: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(8)]],
+      repetPassword: [null, [Validators.required, Validators.minLength(8)]]
     });
+  }
+
+  get f() {
+    return this.formConsumidor.controls;
   }
 
   onSubmit() {

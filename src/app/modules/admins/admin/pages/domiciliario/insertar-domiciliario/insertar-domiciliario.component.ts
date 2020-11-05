@@ -17,9 +17,13 @@ export class InsertarDomiciliarioComponent implements OnInit {
     this.formDomiciliario = this.fb.group({
       tipoDocumento: [null, [Validators.required]],
       numDocumento: [null, [Validators.required]],
-      correo: [null, [Validators.required]],
+      correo: [null, [Validators.required,Validators.email]],
       telefono: [null, [Validators.required]]
     });
+  }
+
+  get f(){
+    return this.formDomiciliario.controls;
   }
 
   onSubmit() {

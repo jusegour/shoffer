@@ -5,7 +5,14 @@
     <form [formGroup]="formCategoria" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="nombre">Nombre:</label>
-        <input formControlName="nombre" type="text" class="form-control" />
+        <input formControlName="nombre" type="text" id="nombre" class="form-control"
+          [class.is-invalid]="f.nombre.invalid && (f.nombre.dirty || f.nombre.touched)" />
+
+        <div *ngIf="f.nombre.invalid && (f.nombre.dirty || f.nombre.touched)" class="invalid-feedback blur-5">
+
+          <div *ngIf="f.nombre.errors.required">Nombre es requerido.</div>
+
+        </div>
       </div>
 
       <button class="btn btn-success" [disabled]="isLoading" type="submit">

@@ -16,8 +16,12 @@ export class InsertarVendedorComponent implements OnInit {
   ngOnInit(): void {
     this.formVendedor = this.fb.group({
       nit: [null, [Validators.required]],
-      correo: [null, [Validators.required]]
+      correo: [null, [Validators.required,Validators.email]]
     });
+  }
+
+  get f(){
+    return this.formVendedor.controls;
   }
 
   onSubmit() {

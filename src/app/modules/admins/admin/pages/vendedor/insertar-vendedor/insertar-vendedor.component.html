@@ -5,12 +5,26 @@
     <form [formGroup]="formVendedor" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="nit">NIT:</label>
-        <input formControlName="nit" type="text" class="form-control" />
+        <input formControlName="nit" type="text" class="form-control" 
+        [class.is-invalid]="f.nit.invalid && (f.nit.dirty || f.nit.touched)"/>
+
+        <div *ngIf="f.nit.invalid && (f.nit.dirty || f.nit.touched)" class="invalid-feedback blur-5">
+
+          <div *ngIf="f.nit.errors.required">NIT es requerido.</div>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="correo">Correo:</label>
-        <input formControlName="correo" type="email" class="form-control" />
+        <input formControlName="correo" type="email" class="form-control" id="correo"
+          [class.is-invalid]="f.correo.invalid && (f.correo.dirty || f.correo.touched)" />
+
+        <div *ngIf="f.correo.invalid && (f.correo.dirty || f.correo.touched)" class="invalid-feedback blur-5">
+
+          <div *ngIf="f.correo.errors.required">Correo es requerido.</div>
+          <div *ngIf="f.correo.errors.email">Correo invalido!</div>
+        </div>
+
       </div>
 
       <button class="btn btn-success" [disabled]="isLoading" type="submit">

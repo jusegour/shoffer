@@ -5,25 +5,53 @@
   <div class="form-row">
     <div class="form-group col-lg-6">
       <label for="tipoDocumento">Tipo de documento:*</label>
-      <select formControlName="tipoDocumento" class="form-control" id="tipoDocumento">
+      <select formControlName="tipoDocumento" class="form-control" id="tipoDocumento"
+        [class.is-invalid]="f.tipoDocumento.invalid && (f.tipoDocumento.dirty || f.tipoDocumento.touched)">
         <option [value]="null">Seleccione una opción</option>
         <option value="CC">CC</option>
         <option value="EXTRANJERIA">EXTRANJERIA</option>
         <option value="PEP">PEP</option>
         <option value="PASAPORTE">PASAPORTE</option>
       </select>
+
+      <div *ngIf="f.tipoDocumento.invalid && (f.tipoDocumento.dirty || f.tipoDocumento.touched)" class="invalid-feedback blur-5">
+
+        <div *ngIf="f.tipoDocumento.errors.required">Tipo de Documento es requerido.</div>
+      </div>
     </div>
     <div class="form-group col-lg-6">
       <label for="numDocumento">Numero de documento:*</label>
-      <input type="tel" formControlName="numDocumento" class="form-control" id="numDocumento" />
+      <input type="tel" formControlName="numDocumento" class="form-control" id="numDocumento" 
+      [class.is-invalid]="f.numDocumento.invalid && (f.numDocumento.dirty || f.numDocumento.touched)">
+      />
+
+      <div *ngIf="f.numDocumento.invalid && (f.numDocumento.dirty || f.numDocumento.touched)" class="invalid-feedback blur-5">
+
+        <div *ngIf="f.numDocumento.errors.required">Numero de Documento es requerido.</div>
+      </div>
     </div>
     <div class="form-group col-lg-6">
       <label for="correo">Correo:*</label>
-      <input type="email" formControlName="correo" class="form-control" id="correo" />
+      <input type="email" formControlName="correo" class="form-control" id="correo" 
+      [class.is-invalid]="f.correo.invalid && (f.correo.dirty || f.correo.touched)">
+      />
+
+      <div *ngIf="f.correo.invalid && (f.correo.dirty || f.correo.touched)" class="invalid-feedback blur-5">
+
+        <div *ngIf="f.correo.errors.required">Correo es requerido.</div>
+        <div *ngIf="f.correo.errors.email">Correo invalido!</div>
+      </div>
     </div>
     <div class="form-group col-lg-6">
       <label for="telefono">Telefono:*</label>
-      <input type="tel" formControlName="telefono" class="form-control" id="telefono" />
+      <input type="tel" formControlName="telefono" class="form-control" id="telefono" 
+      [class.is-invalid]="f.telefono.invalid && (f.telefono.dirty || f.telefono.touched)">
+      />
+
+      <div *ngIf="f.telefono.invalid && (f.telefono.dirty || f.telefono.touched)" class="invalid-feedback blur-5">
+
+        <div *ngIf="f.telefono.errors.required">Telefono es requerido.</div>
+      </div>
     </div>
   </div>
   <button class="btn btn-success">Insertar domiciliario</button>

@@ -17,14 +17,19 @@ export class LoginAdminComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private adminService: AdminService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formLogin = this.fb.group({
-      correo: [null, [Validators.required]],
-      password: [null, [Validators.required]]
+      correo: [null, [Validators.required,Validators.email]],
+      password: [null, [Validators.required,Validators.minLength(8)]]
     });
   }
+
+  get f() {
+    return this.formLogin.controls;
+  }
+
 
   onSubmit() {
     this.isLoading = true;

@@ -18,6 +18,10 @@ export class InsertarCategoriaComponent implements OnInit {
     });
   }
 
+  get f(){
+    return this.formCategoria.controls;
+  }
+
   onSubmit() {
     this.isLoading = true;
     this.categoriaService.storeCategoria(this.formCategoria.value).subscribe(
