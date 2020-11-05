@@ -11,6 +11,7 @@ import { DomiciliarioService } from 'src/app/core/services/domiciliario.service'
 export class LoginDomiciliarioComponent implements OnInit {
   formLogin: FormGroup;
   returnUrl: string;
+  isLoading: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -26,13 +27,17 @@ export class LoginDomiciliarioComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     this.domiciliarioService.login(this.formLogin.value).subscribe(
       data => {
-        alert(data.message);
+        this.isLoading = false;
         localStorage.setItem('DOMICILIARIO_TOKEN', data.token);
         this.router.navigate([this.returnUrl || '/domiciliarios']);
       },
-      err => console.log(err)
+      err => {
+        this.isLoading = false;
+        console.log(err);
+      }
     );
   }
 }

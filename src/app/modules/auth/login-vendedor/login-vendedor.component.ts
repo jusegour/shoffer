@@ -11,6 +11,7 @@ import { VendedorService } from 'src/app/core/services/vendedor.service';
 export class LoginVendedorComponent implements OnInit {
   formLogin: FormGroup;
   returnUrl: string;
+  isLoading: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -26,13 +27,17 @@ export class LoginVendedorComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     this.vendedorService.login(this.formLogin.value).subscribe(
       data => {
-        alert(data.message);
+        this.isLoading = false;
         localStorage.setItem('VENDEDOR_TOKEN', data.token);
         this.router.navigate([this.returnUrl || '/vendedores']);
       },
-      err => console.log(err)
+      err => {
+        this.isLoading = false;
+        console.log(err);
+      }
     );
   }
 }

@@ -11,6 +11,7 @@ import { AdminService } from 'src/app/core/services/admin.service';
 export class LoginAdminComponent implements OnInit {
   formLogin: FormGroup;
   returnUrl: string;
+  isLoading: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -26,12 +27,17 @@ export class LoginAdminComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     this.adminService.login(this.formLogin.value).subscribe(
       data => {
+        this.isLoading = false;
         localStorage.setItem('ADMIN_TOKEN', data.token);
         this.router.navigate([this.returnUrl || '/admins']);
       },
-      err => console.log(err)
+      err => {
+        this.isLoading = false;
+        console.log(err);
+      }
     );
   }
 }

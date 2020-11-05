@@ -11,6 +11,7 @@ import { ConsumidorService } from 'src/app/core/services/consumidor.service';
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
   returnUrl: string;
+  isLoading: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -26,12 +27,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     this.consumidorService.login(this.formLogin.value).subscribe(
       ({ token }) => {
+        this.isLoading = false;
         localStorage.setItem('CONSUMIDOR_TOKEN', token);
         this.router.navigate([this.returnUrl || '/consumidores']);
       },
-      err => console.log(err)
+      err => {
+        this.isLoading = false;
+        console.log(err);
+      }
     );
   }
 }

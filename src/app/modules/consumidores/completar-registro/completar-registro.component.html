@@ -36,7 +36,7 @@
             <div class="form-group col-lg-6">
               <label for="sexo">Sexo: *</label>
               <select class="form-control" id="sexo" formControlName="sexo">
-                <option value="">Seleccione una opcion</option>
+                <option [value]="null" disabled>Seleccione una opcion</option>
                 <option value="MASCULINO">MASCULINO</option>
                 <option value="FEMENINO">FEMENINO</option>
               </select>
