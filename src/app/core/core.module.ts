@@ -9,6 +9,7 @@ import { DepartamentoService } from './services/departamento.service';
 import { DomiciliarioService } from './services/domiciliario.service';
 import { CategoriaService } from './services/categoria.service';
 import { ProductoService } from './services/producto.service';
+import { PublicidadService } from './services/publicidad.service';
 
 @NgModule({
   providers: [
@@ -20,7 +21,8 @@ import { ProductoService } from './services/producto.service';
     DepartamentoService,
     DomiciliarioService,
     CategoriaService,
-    ProductoService
+    ProductoService,
+    PublicidadService
   ],
   imports: [HttpClientModule]
 })

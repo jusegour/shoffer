@@ -55,4 +55,8 @@ export class CompletarRegistroComponent implements OnInit {
       }
     );
   }
+
+  onLogout() {
+    this.authService.logout('CONSUMIDOR');
+  }
 }

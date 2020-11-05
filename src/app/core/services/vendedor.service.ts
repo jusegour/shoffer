@@ -46,4 +46,43 @@ export class VendedorService {
       .post(environment.urlBackend + `auth/login-vendedor`, data)
       .pipe(map(data => data));
   }
+
+  searchProductos(idVendedor: number, q?: string, page?: number, limit?: number): Observable<any> {
+    const url = new URLSearchParams({
+      q: q || '',
+      page: page || 1,
+      limit: limit || 10
+    } as any);
+    return this.http
+      .get(environment.urlBackend + `vendedores/${idVendedor}/productos?${url}`)
+      .pipe(map(data => data));
+  }
+
+  deleteProducto(idVendedor: number, productoId: number): Observable<any> {
+    return this.http
+      .delete(environment.urlBackend + `vendedores/${idVendedor}/productos/${productoId}`)
+      .pipe(map(data => data));
+  }
+
+  searchPublicidades(
+    idVendedor: number,
+    q?: string,
+    page?: number,
+    limit?: number
+  ): Observable<any> {
+    const url = new URLSearchParams({
+      q: q || '',
+      page: page || 1,
+      limit: limit || 10
+    } as any);
+    return this.http
+      .get(environment.urlBackend + `vendedores/${idVendedor}/publicidades?${url}`)
+      .pipe(map(data => data));
+  }
+
+  deletePublicidad(idVendedor: number, publicidadId: number): Observable<any> {
+    return this.http
+      .delete(environment.urlBackend + `vendedores/${idVendedor}/publicidades/${publicidadId}`)
+      .pipe(map(data => data));
+  }
 }

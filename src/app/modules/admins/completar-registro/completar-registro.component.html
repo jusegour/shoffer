@@ -57,9 +57,20 @@
             <input type="tel" class="form-control" id="telefono" formControlName="telefono" />
           </div>
 
-          <button class="btn btn-success btn-block btn-lg mb-2" type="submit">
-            {{ isLoading ? 'Cargando...' : 'Guardar' }}
-          </button>
+          <div
+            class="btn-toolbar justify-content-center"
+            role="toolbar"
+            aria-label="Toolbar with button groups"
+          >
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-secondary" type="button" (click)="onLogout()">
+                Cancelar
+              </button>
+              <button class="btn btn-success" type="submit">
+                {{ isLoading ? 'Cargando...' : 'Finalizar' }}
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     </div>

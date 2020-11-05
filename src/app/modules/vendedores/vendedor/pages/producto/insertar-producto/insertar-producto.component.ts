@@ -1,6 +1,6 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AuthService } from '@app/core/services/auth.service';
 import { CategoriaService } from '@app/core/services/categoria.service';
 import { ProductoService } from '@app/core/services/producto.service';
@@ -31,13 +31,29 @@ export class InsertarProductoComponent implements OnInit {
       detallePromocion: [null, [Validators.required]],
       cantDisponible: [null, [Validators.required]],
       VendedorId: [this.authService.getIdUsuario('VENDEDOR'), [Validators.required]],
-      CategoriaId: [null, [Validators.required]]
+      CategoriaId: [null, [Validators.required]],
+      fotos: this.fb.array([this.fb.control(null, Validators.required)])
     });
 
     this.categoriaService.getCategorias().subscribe(
       data => (this.categorias = data),
       err => console.log(err)
     );
+  }
+
+  get fotosArray() {
+    return this.formProducto.get('fotos') as FormArray;
+  }
+
+  addInput() {
+    if (this.fotosArray.length > 6) {
+      return;
+    }
+    this.fotosArray.push(this.fb.control(null, Validators.required));
+  }
+
+  deleteInput(i: number) {
+    this.fotosArray.removeAt(i);
   }
 
   get f() {
@@ -64,6 +80,8 @@ export class InsertarProductoComponent implements OnInit {
         }
       },
       err => {
+        console.log(err);
+
         // this.progressInfos[index].value = 0;
         // this.message = 'Could not upload the file:' + file.name;
       }

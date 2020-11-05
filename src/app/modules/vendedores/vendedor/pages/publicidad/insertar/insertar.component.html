@@ -1,0 +1,33 @@
+<h3>Insertar Publicidad</h3>
+<hr />
+<form [formGroup]="formCategoria" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <div class="form-group col-lg-6">
+      <label for="descripcion">Descripcion:*</label>
+      <input formControlName="descripcion" id="descripcion" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group col-lg-6">
+      <label for="url">Url:*</label>
+      <input formControlName="url" id="url" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group col-lg-6">
+      <label for="CategoriaId">Categoria:*</label>
+      <select formControlName="CategoriaId" class="form-control" id="CategoriaId">
+        <option [value]="null" disabled>Seleccione una opción</option>
+        <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="form-group col-lg-6">
+      <label for="imagen">Imagen:*</label>
+      <br />
+      <input id="imagen" type="file" (change)="onSelectFile($event)" />
+    </div>
+  </div>
+
+  <button class="btn btn-success" [disabled]="isLoading" type="submit">
+    {{ isLoading ? 'Cargando...' : 'Insertar' }}
+  </button>
+</form>

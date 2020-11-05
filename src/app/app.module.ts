@@ -11,9 +11,10 @@ import { NoFoundComponent } from './componets/no-found/no-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { HeaderMovilComponent } from './componets/header-movil/header-movil.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NoFoundComponent],
+  declarations: [AppComponent, HomeComponent, NoFoundComponent, HeaderMovilComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -25,16 +25,36 @@
       <input formControlName="detallePromocion" type="text" class="form-control" />
     </div>
     <div class="form-group col-lg-6">
-      <label for="CategoriaId">Categorias:*</label>
+      <label for="CategoriaId">Categoria:*</label>
       <select formControlName="CategoriaId" class="form-control" id="CategoriaId">
-        <option value="null" disabled>Seleccione una opción</option>
+        <option [value]="null" disabled>Seleccione una opción</option>
         <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</option>
       </select>
     </div>
 
     <div class="form-group col-lg-12">
-      <label for="fotos">Imagenes:*</label>
-      <input type="file" multiple max="7" (input)="handlerFile($event)" />
+      <label for="fotos">Imagenes:*</label><br />
+      <button
+        (click)="addInput()"
+        type="button"
+        [disabled]="fotosArray.length > 6"
+        class="btn btn-primary"
+      >
+        Agregar imagen
+      </button>
+    </div>
+
+    <div
+      formArrayName="fotos"
+      class="form-group col-lg-6"
+      *ngFor="let alias of fotosArray.controls; index as i"
+    >
+      <label>
+        imagen #{{ i + 1 }}: <br />
+        <input type="file" accept=".jpg, .png, .jpeg, .jfif" [formControlName]="i" />
+
+        <button (click)="deleteInput(i)">x</button>
+      </label>
     </div>
   </div>
 

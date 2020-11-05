@@ -70,6 +70,7 @@ export class AuthService {
 
   logout(tipoUsuario: TipoUsuario) {
     this.removerTokens(tipoUsuario);
+    location.reload();
   }
 
   private removerTokens(tipoUsuario: TipoUsuario) {

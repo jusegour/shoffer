@@ -1,4 +1,4 @@
-<h3>Lista Productos</h3>
+<h3>Lista Publicidades</h3>
 <hr />
 
 <div class="form-row justify-content-end">
@@ -12,24 +12,22 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Nombre</th>
         <th scope="col">Descripcion</th>
-        <th scope="col">Cant Disponible</th>
-        <th scope="col">Promocion detalle</th>
-        <th scope="col">ACCION</th>
+        <th scope="col">Url</th>
+        <th scope="col">Accion</th>
       </tr>
     </thead>
 
     <tbody>
-      <tr *ngFor="let producto of productos | slice: lowValue:highValue; index as i">
+      <tr *ngFor="let publicidad of publicidades | slice: lowValue:highValue; index as i">
         <th scope="row">{{ i + 1 }}</th>
-        <td>{{ producto.nombre }}</td>
-        <td>{{ producto.descripcion }}</td>
-        <td>{{ producto.cantidadDisponible }}</td>
-        <td>{{ producto.detallePromocion }}</td>
+        <td>{{ publicidad.descripcion }}</td>
+        <td>{{ publicidad.url }}</td>
         <td>
           <button class="btn btn-sm btn-primary">View</button>
-          <button class="btn btn-sm btn-danger ml-2" (click)="onDelete(producto.id)">Delete</button>
+          <button class="btn btn-sm btn-danger ml-2" (click)="onDelete(publicidad.id)">
+            Delete
+          </button>
         </td>
       </tr>
     </tbody>

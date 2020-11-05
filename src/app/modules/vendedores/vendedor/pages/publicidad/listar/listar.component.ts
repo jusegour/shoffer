@@ -7,13 +7,15 @@ import { fromEvent, of } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged, exhaustMap, catchError } from 'rxjs/operators';
 
 @Component({
-  templateUrl: './listar-productos.component.html',
-  styleUrls: ['./listar-productos.component.css']
+  templateUrl: './listar.component.html',
+  styleUrls: ['./listar.component.css']
 })
-export class ListarProductosComponent implements OnInit {
-  productos: Array<any>;
+export class ListarComponent implements OnInit {
+  publicidades: Array<any>;
   pagination: Pagination;
   keyword: string;
+  lowValue: number = 0;
+  highValue: number = 20;
 
   constructor(private vendedorService: VendedorService, private authService: AuthService) {}
 
@@ -26,13 +28,13 @@ export class ListarProductosComponent implements OnInit {
         exhaustMap(keyword => {
           this.keyword = keyword;
           return this.vendedorService
-            .searchProductos(this.authService.getIdUsuario('VENDEDOR'), keyword)
+            .searchPublicidades(this.authService.getIdUsuario('VENDEDOR'), keyword)
             .pipe(catchError(_ => of('keep on searching!!!')));
         })
       )
       .subscribe(
         ({ results, info }) => {
-          this.productos = results;
+          this.publicidades = results;
           this.pagination = info;
         },
         err => console.log(err)
@@ -40,23 +42,20 @@ export class ListarProductosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getVendedores();
+    this.getPublicidades();
   }
-
-  lowValue: number = 0;
-  highValue: number = 20;
 
   setPageSizeOptions(pageEvent: PageEvent) {
     this.lowValue = pageEvent.pageIndex * pageEvent.pageSize;
     this.highValue = this.lowValue + pageEvent.pageSize;
   }
 
-  getVendedores(page?: number, limit?: number) {
+  getPublicidades(page?: number, limit?: number) {
     this.vendedorService
-      .searchProductos(this.authService.getIdUsuario('VENDEDOR'), this.keyword, page, limit)
+      .searchPublicidades(this.authService.getIdUsuario('VENDEDOR'), this.keyword, page, limit)
       .subscribe(
         ({ results, info }) => {
-          this.productos = results;
+          this.publicidades = results;
           this.pagination = info;
         },
         err => console.log(err)
@@ -68,10 +67,10 @@ export class ListarProductosComponent implements OnInit {
       return null;
     }
 
-    this.vendedorService.deleteProducto(this.authService.getIdUsuario('VENDEDOR'), id).subscribe(
+    this.vendedorService.deletePublicidad(this.authService.getIdUsuario('VENDEDOR'), id).subscribe(
       ({ message }) => {
         console.log(message);
-        this.getVendedores();
+        this.getPublicidades();
       },
       err => console.log(err)
     );
